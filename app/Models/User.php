@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 
 
 class User extends Authenticatable
@@ -19,5 +20,8 @@ class User extends Authenticatable
         'date_of_birth',
     ];
 
-    // ... rest of the model code
+    public function getAgeAttribute()
+    {
+        return Carbon::parse($this->date_of_birth)->age;
+    }
 }
